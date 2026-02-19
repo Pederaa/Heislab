@@ -4,7 +4,13 @@
 #include <time.h>
 #include "driver/elevio.h"
 
+
 int main(){
+    
+}
+
+
+int eksample_main(){
     elevio_init();
     
     printf("=== Example Program ===\n");
