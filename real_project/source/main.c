@@ -6,7 +6,7 @@
 
 
 int main(){
-    
+    // gjort noen endringer
 }
 
 
