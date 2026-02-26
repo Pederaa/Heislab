@@ -3,10 +3,35 @@
 #include <signal.h>
 #include <time.h>
 #include "driver/elevio.h"
+#include <stdbool.h>
+#include "Elevator.h"
+
 
 
 int main(){
     // gjort noen endringer
+    elevio_init();
+    Elevator elevator;
+    Elevator_controller ec;
+
+    while(true){
+        int floor = elevio_floorSensor();
+        if(floor == 0){
+            elevator.direction = DIRN_UP;
+            elevio_motorDirection(DIRN_UP);
+
+        }
+
+        if(floor == N_FLOORS-1){
+            elevator.direction = DIRN_DOWN;
+            elevio_motorDirection(DIRN_DOWN);
+        } else{
+            elevator.direction = DIRN_STOP;
+            elevio_motorDirection(DIRN_DOWN);
+        }
+
+
+    }
 }
 
 
