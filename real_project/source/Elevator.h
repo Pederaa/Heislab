@@ -12,7 +12,7 @@ typedef struct{
     MotorDirection direction;
 } Elevator;
 
-void move(Elevator* e, MotorDirection dir);
-void stop();
+void Elevator_move(Elevator* e, MotorDirection dir);
+void Elevator_stop();
 void Elevator_open_door(Elevator* e);
-bool floor_reached();
+bool Elevator_floor_reached();
