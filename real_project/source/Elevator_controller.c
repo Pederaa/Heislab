@@ -21,3 +21,5 @@ MotorDirection elevator_controller_choose_dir(Elevator_controller* ec, Elevator*
         e->direction = DIRN_STOP;
     }
 } 
+
+//lag logikk for valg av target_floor
