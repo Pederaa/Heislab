@@ -2,11 +2,31 @@
 #include "Elevator.h"
 
 
-// void move();
-// void stop();
-void Elevator_open_door(){
-    //open door
-    sleep(3);
-    //close door
+void move(Elevator* e, MotorDirection dir){
+    e->direction = dir;
+    elevio_motorDirection(dir);
 }
-// void floor_reached();
+
+void stop(){
+  elevio_motorDirection(DIRN_STOP);
+}
+
+void Elevator_open_door(Elevator* e){
+    e->door_open = true;
+    elevio_doorOpenLamp(1);
+
+    sleep(3);
+
+    elevio_doorOpenLamp(0);
+    e->door_open = false;
+}
+
+bool floor_reached(){
+    int floor = elevio_floorSensor();
+    if (floor != -1){
+        return true;
+    } else {
+        return false;
+    }
+
+}
