@@ -1,16 +1,12 @@
-#pragma once
-
 #include <stdbool.h>
+#include "Elevator.h"
 
-struct Elevator{
-    int current_floor;
-    int direction;
-    bool door_open;
-    bool stopPressed;
-    bool at_floor;
-};
 
 // void move();
 // void stop();
-// void open_door();
+void Elevator_open_door(){
+    //open door
+    sleep(3);
+    //close door
+}
 // void floor_reached();
