@@ -1,16 +1,32 @@
-#pragma once
-
 #include <stdbool.h>
+#include "Elevator.h"
 
-struct Elevator{
-    int current_floor;
-    int direction;
-    bool door_open;
-    bool stopPressed;
-    bool at_floor;
-};
 
-// void move();
-// void stop();
-// void open_door();
-// void floor_reached();
+void Elevator_move(Elevator* e, MotorDirection dir){
+    e->direction = dir;
+    elevio_motorDirection(dir);
+}
+
+void Elevator_stop(){
+  elevio_motorDirection(DIRN_STOP);
+}
+
+void Elevator_open_door(Elevator* e){
+    e->door_open = true;
+    elevio_doorOpenLamp(1);
+
+    sleep(3);
+
+    elevio_doorOpenLamp(0);
+    e->door_open = false;
+}
+
+bool Elevator_floor_reached(){
+    int floor = elevio_floorSensor();
+    if (floor != -1){
+        return true;
+    } else {
+        return false;
+    }
+
+}

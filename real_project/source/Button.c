@@ -1,10 +1,4 @@
-#include <stdbool.h>
-
-struct Button{
-    int floor;
-    bool light_on;
-    int destination_floor;
-};
+#include "Button.h"
 
 void Button_pressed(){
 };
