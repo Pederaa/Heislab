@@ -4,33 +4,49 @@
 #include <time.h>
 #include "driver/elevio.h"
 #include <stdbool.h>
+
 #include "Elevator.h"
+#include "Lights.h"
 
 
 
 int main(){
-    // gjort noen endringer
     elevio_init();
     Elevator elevator;
     Elevator_controller ec;
+    Lights lights;
 
     while(true){
         int floor = elevio_floorSensor();
+        lights_updateLights(lights);
+
+        // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger. Kan stoppe. 
+        bool should_stop = elevator_controller_should_stop()
+        if (should_stop){
+            elevator.stop()
+            continue;
+        }
+        elevator.direction = elevator_controller_choose_dir(ec, elevator);
         if(floor == 0){
             elevator.direction = DIRN_UP;
-            elevio_motorDirection(DIRN_UP);
-
         }
-
         if(floor == N_FLOORS-1){
             elevator.direction = DIRN_DOWN;
-            elevio_motorDirection(DIRN_DOWN);
-        } else{
-            elevator.direction = DIRN_STOP;
-            elevio_motorDirection(DIRN_DOWN);
         }
+        elevio_motorDirection(elevator.direction);
 
 
+        // Ser om heisen skal stoppe på en etasje 
+        bool at_floor = elevator.at_floor();
+        if (at_floor){
+            bool should_stop = elevator_controller_should_stop(elevator.at_floor, ec)
+            if (should_stop){
+                lights_setfloorIndicator(lights, elevator.current_floor, 0);
+                Elevator_open_door(elevator);
+                // Vent 3 sekunder
+                Elevator_close_door(Elevator* e);
+            }
+        }
     }
 }
 

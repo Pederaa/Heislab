@@ -15,4 +15,5 @@ typedef struct{
 void Elevator_move(Elevator* e, MotorDirection dir);
 void Elevator_stop();
 void Elevator_open_door(Elevator* e);
+void Elevator_close_door(Elevator* e);
 bool Elevator_floor_reached();
