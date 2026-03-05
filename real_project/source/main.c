@@ -5,7 +5,9 @@
 #include "driver/elevio.h"
 #include <stdbool.h>
 
+#include "Elevator_controller.h"
 #include "Elevator.h"
+#include "Elevator_controller.h"
 #include "Lights.h"
 
 int main(){
@@ -16,28 +18,26 @@ int main(){
 
     while(true){
         int floor = elevio_floorSensor();
-        lights_updateLights(&lights);
+        lights_updateLights(&lights, &elevator);
 
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger. Kan stoppe. 
         bool should_stop = elevator_controller_should_stop(elevator.current_floor, ec);
         if (should_stop){
-            elevator_stop();
+            Elevator_stop();
             continue;
         }
-        elevator_controller_choose_dir(&ec, elevator);
+        elevator_controller_choose_dir(&ec, &elevator);
         elevio_motorDirection(elevator.direction);
         Elevator_move(&elevator, elevator.direction);
 
 
         // Ser om heisen skal stoppe på en etasje 
-        bool at_floor = elevator_at_floor();
+        bool at_floor = elevator.at_floor;
         if (at_floor){
             bool should_stop = elevator_controller_should_stop(elevator.at_floor, ec);
             if (should_stop){
                 lights_setfloorIndicator(&lights, elevator.current_floor, 0);
                 Elevator_open_door(&elevator);
-                // Vent 3 sekunder
-                Elevator_close_door(&elevator);
             }
         }
     }

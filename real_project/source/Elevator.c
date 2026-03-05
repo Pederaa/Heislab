@@ -7,8 +7,9 @@ void Elevator_move(Elevator* e, MotorDirection dir){
     elevio_motorDirection(dir);
 }
 
-void Elevator_stop(){
-  elevio_motorDirection(DIRN_STOP);
+void Elevator_stop(Elevator* e){
+    e->direction = DIRN_STOP;
+    elevio_motorDirection(DIRN_STOP);
 }
 
 void Elevator_open_door(Elevator* e){

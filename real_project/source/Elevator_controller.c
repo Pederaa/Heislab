@@ -1,5 +1,5 @@
 #include "Elevator_controller.h"
-#include "elevio.h"
+#include "driver/elevio.h"
 #include "Elevator.h"
 #include <stdbool.h>
 
@@ -12,7 +12,7 @@ void elevator_controller_new_target_floor(Elevator_controller* ec, int target){
     ec->target_floor = target;
 };
 
-MotorDirection elevator_controller_choose_dir(Elevator_controller* ec, Elevator* e){
+void elevator_controller_choose_dir(Elevator_controller* ec, Elevator* e){
     if(e->current_floor == 0){
         e->direction = DIRN_UP;
     }
@@ -29,6 +29,4 @@ MotorDirection elevator_controller_choose_dir(Elevator_controller* ec, Elevator*
     else {
         e->direction = DIRN_STOP;
     }
-} 
-
-//lag logikk for valg av target_floor
+}

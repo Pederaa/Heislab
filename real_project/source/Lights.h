@@ -1,6 +1,7 @@
 #pragma once
 
-#include <elevio.h>
+#include "driver/elevio.h"
+#include "Elevator.h"
 
 typedef struct {
     int floor_lights[N_FLOORS];
@@ -12,4 +13,4 @@ typedef struct {
 Lights lights_initilize();
 void lights_setfloorIndicator(Lights *lights, int floor, int value);
 void lights_setOrderlIght(Lights *lights, int floor, MotorDirection dir, int value);
-void lights_updateLights(Lights *lights);
+void lights_updateLights(Lights *lights, Elevator *e);

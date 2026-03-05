@@ -1,11 +1,10 @@
 #pragma once
 #include <unistd.h>
-#include "Elevator_controller.h"
-#include "elevio.h"
+#include "driver/elevio.h"
+#include <stdbool.h>
 
 typedef struct{
     int current_floor;
-    int direction;
     bool door_open;
     bool stopPressed;
     bool at_floor;
@@ -15,5 +14,4 @@ typedef struct{
 void Elevator_move(Elevator* e, MotorDirection dir);
 void Elevator_stop();
 void Elevator_open_door(Elevator* e);
-void Elevator_close_door(Elevator* e);
 bool Elevator_floor_reached();

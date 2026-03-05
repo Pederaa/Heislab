@@ -1,6 +1,6 @@
-#include <Lights.h>
-#include <Elevator.h>
-#include <elevio.h>
+#include "Lights.h"
+#include "Elevator.h"
+#include "driver/elevio.h"
 
 Lights lights_initilize(){
     Lights l;
@@ -34,7 +34,7 @@ void lights_updateLights(Lights *lights, Elevator *e){
         for (int button=0; button<N_BUTTONS; button++){
             if (elevio_callButton(floor, button)){
                 MotorDirection dir;
-                if (button = 0){
+                if (button == 0){
                     dir = DIRN_DOWN;
                 } else {
                     dir = DIRN_UP;

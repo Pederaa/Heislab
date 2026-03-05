@@ -7,6 +7,4 @@ typedef struct{
     int destination_floor;
 } Button;
 
-void Button_pressed(){
-    
-};
+void Button_pressed();
