@@ -37,4 +37,5 @@ void elevator_controller_choose_dir(Elevator_controller* ec, Elevator* e){
 Elevator_controller Elevator_controller_initialize(){
     Elevator_controller ec = {0};
     ec.target_floor = 0;
+    return ec;
 }
