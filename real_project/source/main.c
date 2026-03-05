@@ -8,8 +8,6 @@
 #include "Elevator.h"
 #include "Lights.h"
 
-
-
 int main(){
     elevio_init();
     Elevator elevator;
@@ -26,14 +24,9 @@ int main(){
             elevator.stop()
             continue;
         }
-        elevator.direction = elevator_controller_choose_dir(ec, elevator);
-        if(floor == 0){
-            elevator.direction = DIRN_UP;
-        }
-        if(floor == N_FLOORS-1){
-            elevator.direction = DIRN_DOWN;
-        }
+        elevator_controller_choose_dir(ec, elevator);
         elevio_motorDirection(elevator.direction);
+        Elevator_move(elevator, elevator.direction);
 
 
         // Ser om heisen skal stoppe på en etasje 
