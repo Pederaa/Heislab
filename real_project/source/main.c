@@ -36,7 +36,7 @@ int main(){
 
         //sjekker og stopper om stopp er trykt ned
         if(elevio_stopButton()){
-            elevio_motorDirection(DIRN_STOP);
+            Elevator_stop(&elevator);
             break;
         }
 
