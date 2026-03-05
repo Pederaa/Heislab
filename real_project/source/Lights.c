@@ -27,20 +27,38 @@ void lights_setOrderlIght(Lights *lights, int floor, MotorDirection dir, int val
     }
 }
 
+void lights_setPanellIght(Lights *lights, int floor, int value){
+    (*lights).panel_lights[floor] = value;
+}
+
 void lights_updateLights(Lights *lights, Elevator *e){
+    // Oppdaterer etasjelampene
     elevio_floorIndicator(e->current_floor);
 
+    // Oppdaterer beestilingsknappene
     for (int floor=0; floor<N_FLOORS; floor++){
-        for (int button=0; button<N_BUTTONS; button++){
-            if (elevio_callButton(floor, button)){
-                MotorDirection dir;
-                if (button == 0){
-                    dir = DIRN_DOWN;
-                } else {
-                    dir = DIRN_UP;
-                }
-                lights_setOrderlIght(lights, floor, dir, 1);
-            }
+        // Nedknappene
+        ButtonType btn = BUTTON_HALL_DOWN;
+        bool isButtonPressed = elevio_callButton(floor, btn);
+        if (isButtonPressed){
+            lights_setOrderlIght(lights, floor, DIRN_DOWN, 1);
         }
+        elevio_buttonLamp(floor, btn, lights->ned_lights[floor]);
+
+        // Oppknappene
+        btn = BUTTON_HALL_UP;
+        isButtonPressed = elevio_callButton(floor, btn);
+        if (isButtonPressed){
+            lights_setOrderlIght(lights, floor, DIRN_UP, 1);
+        }
+        elevio_buttonLamp(floor, btn, lights->opp_lights[floor]);
+
+        // Heispanelknappene
+        btn = BUTTON_CAB;
+        isButtonPressed = elevio_callButton(floor, btn);
+        if (isButtonPressed){
+            lights_setPanellIght(lights, floor, 1);
+        }
+        elevio_buttonLamp(floor, btn, lights->panel_lights[floor]);
     }
 }
