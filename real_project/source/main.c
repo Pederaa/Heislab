@@ -12,16 +12,20 @@
 
 int main(){
     elevio_init();
-    Elevator elevator;
-    Elevator_controller ec;
-    Lights lights;
+    Elevator elevator = {0};
+    Elevator_controller ec = {0};
+    Lights lights = {0};
 
     while(true){
-        int floor = elevio_floorSensor();
-        lights_updateLights(&lights, &elevator);
+        int sensor_values = elevio_floorSensor();
+        if (sensor_values >= 0){
+            elevator.current_floor = sensor_values;
+        }
+
+        lights_updateLights(&lights, &elevator);        
 
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger. Kan stoppe. 
-        bool should_stop = elevator_controller_should_stop(elevator.current_floor, ec);
+        bool should_stop = elevator_controller_should_stop(elevator.current_floor, elevator.at_floor, ec);
         if (should_stop){
             Elevator_stop(&elevator);
             continue;
@@ -34,7 +38,7 @@ int main(){
         // Ser om heisen skal stoppe på en etasje 
         bool at_floor = elevator.at_floor;
         if (at_floor){
-            bool should_stop = elevator_controller_should_stop(elevator.at_floor, ec);
+            bool should_stop = elevator_controller_should_stop(elevator.current_floor, elevator.at_floor, ec);
             if (should_stop){
                 lights_setfloorIndicator(&lights, elevator.current_floor, 0);
                 Elevator_open_door(&elevator);

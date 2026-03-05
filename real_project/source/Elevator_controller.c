@@ -4,7 +4,11 @@
 #include <stdbool.h>
 
 
-bool elevator_controller_should_stop(int floor, Elevator_controller ec){
+bool elevator_controller_should_stop(int floor, bool at_floor, Elevator_controller ec){
+    if (!at_floor){
+        return false;
+    }
+    
     return (floor == ec.target_floor);
 };
 

@@ -1,5 +1,7 @@
 #include <stdbool.h>
 #include "Elevator.h"
+#include "driver/elevio.h"
+
 
 
 void Elevator_move(Elevator* e, MotorDirection dir){
