@@ -1,12 +1,12 @@
-==78369==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x642530872ba1 bp 0x7ffc72e19150 sp 0x7ffc72e19130 T0)
-==78369==The signal is caused by a WRITE memory access.
-==78369==Hint: address points to the zero page.
-    #0 0x642530872ba1 in Elevator_stop /home/student/Arda/Heislab/real_project/source/Elevator.c:11:18
-    #1 0x6425308727cd in main /home/student/Arda/Heislab/real_project/source/main.c:26:13
-    #2 0x7c754582a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-    #3 0x7c754582a28a in __libc_start_main csu/../csu/libc-start.c:360:3
-    #4 0x6425307973d4 in _start (/home/student/Arda/Heislab/real_project/elevator+0x2c3d4) (BuildId: 8013dbbc71d52f20b825a5cc7e90ed1fdb4d353c)
+==80970==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x5c21980f7ba1 bp 0x7ffd6a7d86d0 sp 0x7ffd6a7d86b0 T0)
+==80970==The signal is caused by a WRITE memory access.
+==80970==Hint: address points to the zero page.
+    #0 0x5c21980f7ba1 in Elevator_stop /home/student/Arda/Heislab/real_project/source/Elevator.c:11:18
+    #1 0x5c21980f77cd in main /home/student/Arda/Heislab/real_project/source/main.c:26:13
+    #2 0x7ee3f8c2a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7ee3f8c2a28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #4 0x5c219801c3d4 in _start (/home/student/Arda/Heislab/real_project/elevator+0x2c3d4) (BuildId: 8013dbbc71d52f20b825a5cc7e90ed1fdb4d353c)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV /home/student/Arda/Heislab/real_project/source/Elevator.c:11:18 in Elevator_stop
-==78369==ABORTING
+==80970==ABORTING

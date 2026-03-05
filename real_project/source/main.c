@@ -23,7 +23,7 @@ int main(){
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger. Kan stoppe. 
         bool should_stop = elevator_controller_should_stop(elevator.current_floor, ec);
         if (should_stop){
-            Elevator_stop();
+            Elevator_stop(&elevator);
             continue;
         }
         elevator_controller_choose_dir(&ec, &elevator);
