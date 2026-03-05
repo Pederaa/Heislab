@@ -1,4 +1,5 @@
 #include <Lights.h>
+#include <Elevator.h>
 #include <elevio.h>
 
 Lights lights_initilize(){
@@ -26,8 +27,20 @@ void lights_setOrderlIght(Lights *lights, int floor, MotorDirection dir, int val
     }
 }
 
-void lights_updateLights(Lights *lights){
-    if (elevio_callButton(0, 0)){
-        lights_setOrderlIght(lights, 0, 0, 1);
+void lights_updateLights(Lights *lights, Elevator *e){
+    elevio_floorIndicator(e->current_floor);
+
+    for (int floor=0; floor<N_FLOORS; floor++){
+        for (int button=0; button<N_BUTTONS; button++){
+            if (elevio_callButton(floor, button)){
+                MotorDirection dir;
+                if (button = 0){
+                    dir = DIRN_DOWN;
+                } else {
+                    dir = DIRN_UP;
+                }
+                lights_setOrderlIght(lights, floor, dir, 1);
+            }
+        }
     }
 }
