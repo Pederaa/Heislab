@@ -20,25 +20,22 @@ int main(){
         
         lights_updateLights(&lights, &elevator);
 
+        if (Elevator_handle_stop_button(&elevator)){    //Håndterer stopplogikken
+            continue;
+        } 
 
-         //stopp trykkes ned og dør er åpen
-        if (elevator.door_open && elevio_stopButton()){
-            elevator.door_open_time = time(NULL);
-        }
-        
+        Elevator_update_position(&elevator); //oppdaterer etasje jevnlig
+            
         //kontinuerlig sjekk om dør er åpen
         if (elevator.door_open) {
             if (time(NULL) - elevator.door_open_time >= 3){
                 Elevator_close_door(&elevator);
-            }
-            continue;
-            }
-
-        //sjekker og stopper om stopp er trykt ned
-        if(elevio_stopButton()){
-            Elevator_stop(&elevator);
-            break;
+                }
+            continue; //forhindrer heisen fra å kjøre mens døra er åpen
         }
+        
+
+
 
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger. Kan stoppe. 
         bool should_stop = elevator_controller_should_stop(elevator.current_floor, elevator.at_floor, ec);
@@ -61,6 +58,7 @@ int main(){
             }
         }
     }
+
 }
 
 
