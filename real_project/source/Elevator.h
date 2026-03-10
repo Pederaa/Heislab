@@ -18,3 +18,5 @@ void Elevator_open_door(Elevator* e);
 void Elevator_close_door(Elevator* e);
 Elevator Elevator_initialize();
 bool Elevator_floor_reached();
+void Elevator_update_position(Elevator* e);
+bool Elevator_handle_stop_button(Elevator* e);

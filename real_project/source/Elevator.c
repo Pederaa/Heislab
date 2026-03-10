@@ -50,3 +50,36 @@ Elevator Elevator_initialize(){
     e.door_open_time = time(NULL);
     return e;
 }
+
+void Elevator_update_position(Elevator* e){
+    int sensor_value = elevio_floorSensor();
+        if (sensor_value >= 0) {
+            e->current_floor = sensor_value;
+            e->at_floor = true;
+        } else {
+            e->at_floor = false;
+            }
+}
+
+bool Elevator_handle_stop_button(Elevator* e){
+    //stopp trykkes ned, continue forhindrer nye bestillinger mens dette skjer.
+        if(elevio_stopButton()){
+            Elevator_stop(e);
+            elevio_stopLamp(1);
+            //clear_que(), fjerner køa etter at stopp er trykket ned.
+
+             //dør er åpen
+            if (e->door_open){
+                e->door_open_time = time(NULL);
+            }
+            if (e->at_floor){
+                Elevator_open_door(e);
+                e->door_open_time = time(NULL);
+            }
+            return true;
+        }
+
+        elevio_stopLamp(0); //skrur av stopplyset, og vi returnerer false for å ikke restarte while loopen i main
+        return false;
+
+}
