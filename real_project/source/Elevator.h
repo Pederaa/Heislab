@@ -20,3 +20,5 @@ Elevator Elevator_initialize();
 bool Elevator_floor_reached();
 void Elevator_update_position(Elevator* e);
 bool Elevator_handle_stop_button(Elevator* e);
+bool Elevator_handle_obstruction(Elevator* e);
+void Elevator_initialize_pos(Elevator* e);
