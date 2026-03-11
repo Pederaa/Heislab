@@ -25,7 +25,7 @@ void Elevator_close_door(Elevator* e){
     elevio_doorOpenLamp(0);
 }
 
-bool Elevator_floor_reached(){
+bool Elevator_floor_reached(){ //brukes ikke
     int floor = elevio_floorSensor();
     if (floor != -1){
         return true;
@@ -63,23 +63,41 @@ void Elevator_update_position(Elevator* e){
 
 bool Elevator_handle_stop_button(Elevator* e){
     //stopp trykkes ned, continue forhindrer nye bestillinger mens dette skjer.
-        if(elevio_stopButton()){
-            Elevator_stop(e);
-            elevio_stopLamp(1);
-            //clear_que(), fjerner køa etter at stopp er trykket ned.
+    Elevator_update_position(e);
+    if(elevio_stopButton()){
+        Elevator_stop(e);
+        elevio_stopLamp(1);
+        //clear_que(), fjerner køa etter at stopp er trykket ned.
 
-             //dør er åpen
-            if (e->door_open){
-                e->door_open_time = time(NULL);
-            }
-            if (e->at_floor){
-                Elevator_open_door(e);
-                e->door_open_time = time(NULL);
-            }
-            return true;
+         //dør er åpen
+        if (e->door_open){
+            e->door_open_time = time(NULL);
         }
+        if (e->at_floor){
+            Elevator_open_door(e);
+            e->door_open_time = time(NULL);
+        }
+        return true;
+    }
+    elevio_stopLamp(0); //skrur av stopplyset, og vi returnerer false for å ikke restarte while loopen i main
 
-        elevio_stopLamp(0); //skrur av stopplyset, og vi returnerer false for å ikke restarte while loopen i main
-        return false;
+    return false;
 
 }
+
+bool Elevator_handle_obstruction(Elevator* e){
+    if(elevio_obstruction() && e->door_open){ //siste sjekk er ikke nødvendig, mest for robusthet
+        e->door_open_time = time(NULL);
+        return true;
+    }
+    return false;
+}
+
+void Elevator_initialize_pos(Elevator* e){
+    if (elevio_floorSensor() == -1){
+        Elevator_move(e, DIRN_DOWN);
+        while (elevio_floorSensor() == -1){}
+        Elevator_stop(e);
+        Elevator_update_position(e);
+        }
+    }
