@@ -56,15 +56,14 @@ int main(){
                 continue;
             }
         }
+        }
         if (ec.target_floor == -1) {
             elevator_controller_change_target_floor(&ec, &elevator, &lights);
         }
 
+
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger.
         elevator_controller_choose_dir(&ec, &elevator);
         Elevator_move(&elevator, elevator.direction);
-
-
-    }
     }
 }
