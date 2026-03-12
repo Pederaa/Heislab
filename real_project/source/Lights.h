@@ -2,7 +2,10 @@
 #include "driver/elevio.h"
 #include "Elevator.h"
 
-typedef struct {
+typedef struct Elevator  Elevator;
+
+
+typedef struct Lights{
     int floor_lights[N_FLOORS];
     int panel_lights[N_FLOORS];
     int opp_lights[N_FLOORS];

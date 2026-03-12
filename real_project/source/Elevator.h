@@ -3,9 +3,10 @@
 #include "driver/elevio.h"
 #include <stdbool.h>
 #include <time.h>
-#include "Lights.h"
 
-typedef struct{
+typedef struct Lights Lights;
+
+typedef struct Elevator{
     int current_floor;
     bool door_open;
     bool at_floor;

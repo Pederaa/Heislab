@@ -2,13 +2,12 @@
 #include "Elevator.h"
 #include "driver/elevio.h"
 
-void lights_initilize(Lights* l){
-    Lights l;
+void lights_initilize(Lights* lights){
     for (int i=0; i<N_FLOORS; i++){
-        l->floor_lights[i] = 0;
-        l->panel_lights[i] = 0;  
-        l->opp_lights[i] = 0;
-        l->ned_lights[i] = 0;
+        lights->floor_lights[i] = 0;
+        lights->panel_lights[i] = 0;  
+        lights->opp_lights[i] = 0;
+        lights->ned_lights[i] = 0;
     }
 };
 
