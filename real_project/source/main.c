@@ -14,6 +14,8 @@ int main(){
     Elevator_controller ec = Elevator_controller_initialize();
     Elevator_initialize_pos(&elevator);
     Lights lights = {0};
+    bool just_arrived = false;
+
 
     while(true){
         
@@ -41,19 +43,20 @@ int main(){
 
             Elevator_close_door(&elevator);
         }
-        
         // Ser om heisen skal stoppe på en etasje. Må gjøres før vi kjører videre. 
-        if (elevator.at_floor){
+        if (elevator.at_floor && (just_arrived == false)){
             bool should_stop = elevator_controller_should_stop(elevator.current_floor, elevator.at_floor, ec);
             if (should_stop){
                 Elevator_stop(&elevator);
-                lights_setfloorIndicator(&lights, elevator.current_floor, 0);
+                lights_clear_orders_at_floor(&lights, &elevator);
                 Elevator_open_door(&elevator);
+                just_arrived = true;
                 continue;
             }
         }
+        elevator_controller_change_target_floor(&ec, &elevator, &lights);
 
-
+        just_arrived = false;
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger.
         elevator_controller_choose_dir(&ec, &elevator);
         Elevator_move(&elevator, elevator.direction);

@@ -62,3 +62,9 @@ void lights_updateLights(Lights *lights, Elevator *e){
         elevio_buttonLamp(floor, btn, lights->panel_lights[floor]);
     }
 }
+
+void lights_clear_orders_at_floor(Lights* lights, Elevator* e){
+    lights_setOrderlIght(lights, e->current_floor, DIRN_UP, 0);
+    lights_setPanellIght(lights, e->current_floor,0);
+    lights_setOrderlIght(lights, e->current_floor, DIRN_DOWN, 0);
+}
