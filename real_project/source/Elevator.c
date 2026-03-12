@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include "Elevator.h"
 #include "driver/elevio.h"
-
+#include "Lights.h"
 
 
 void Elevator_move(Elevator* e, MotorDirection dir){
@@ -61,13 +61,14 @@ void Elevator_update_position(Elevator* e){
             }
 }
 
-bool Elevator_handle_stop_button(Elevator* e){
+bool Elevator_handle_stop_button(Elevator* e, Lights* lights){
     //stopp trykkes ned, continue forhindrer nye bestillinger mens dette skjer.
     Elevator_update_position(e);
     if(elevio_stopButton()){
         Elevator_stop(e);
         elevio_stopLamp(1);
-        //clear_que(), fjerner køa etter at stopp er trykket ned.
+
+        lights_initilize(lights);
 
          //dør er åpen
         if (e->door_open){

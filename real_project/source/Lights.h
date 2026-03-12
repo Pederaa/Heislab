@@ -9,7 +9,7 @@ typedef struct {
     int ned_lights[N_FLOORS];
 } Lights;
 
-Lights lights_initilize();
+void lights_initilize(Lights *lights);
 void lights_setfloorIndicator(Lights *lights, int floor, int value);
 void lights_setOrderlIght(Lights *lights, int floor, MotorDirection dir, int value);
 void lights_setPanellIght(Lights *lights, int floor, int value);

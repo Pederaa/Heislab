@@ -3,6 +3,7 @@
 #include "driver/elevio.h"
 #include <stdbool.h>
 #include <time.h>
+#include "Lights.h"
 
 typedef struct{
     int current_floor;
@@ -19,6 +20,6 @@ void Elevator_close_door(Elevator* e);
 Elevator Elevator_initialize();
 bool Elevator_floor_reached();
 void Elevator_update_position(Elevator* e);
-bool Elevator_handle_stop_button(Elevator* e);
+bool Elevator_handle_stop_button(Elevator* e, Lights* lights);
 bool Elevator_handle_obstruction(Elevator* e);
 void Elevator_initialize_pos(Elevator* e);

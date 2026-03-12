@@ -22,7 +22,7 @@ int main(){
         lights_updateLights(&lights, &elevator);
 
         
-        if (Elevator_handle_stop_button(&elevator)){    //Håndterer stopplogikken
+        if (Elevator_handle_stop_button(&elevator, &lights)){    //Håndterer stopplogikken
             continue;
         }
 
@@ -37,7 +37,7 @@ int main(){
                 continue;
             }
 
-            if (time(NULL) - elevator.door_open_time < 3){
+            if (elevator.door_open_time < 3){
                 continue; //forhindrer heisen fra å kjøre mens døra er åpen
                 }
 
