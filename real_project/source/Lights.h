@@ -1,5 +1,4 @@
 #pragma once
-
 #include "driver/elevio.h"
 #include "Elevator.h"
 
@@ -15,3 +14,4 @@ void lights_setfloorIndicator(Lights *lights, int floor, int value);
 void lights_setOrderlIght(Lights *lights, int floor, MotorDirection dir, int value);
 void lights_setPanellIght(Lights *lights, int floor, int value);
 void lights_updateLights(Lights *lights, Elevator *e);
+void lights_clear_orders_at_floor(Lights* lights, Elevator* e);
