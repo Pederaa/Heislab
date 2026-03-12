@@ -44,7 +44,7 @@ int main(){
             Elevator_close_door(&elevator);
         }
         // Ser om heisen skal stoppe på en etasje. Må gjøres før vi kjører videre. 
-        if (elevator.at_floor && elevator_controller_floor_has_order(&lights, elevator.current_floor)){ {
+        if (elevator.at_floor && elevator_controller_floor_has_order(&lights, elevator.current_floor)){
             
             bool should_stop = elevator_controller_should_stop(elevator.current_floor, elevator.at_floor, ec);
             
@@ -61,7 +61,5 @@ int main(){
         elevator_controller_choose_dir(&ec, &elevator);
         Elevator_move(&elevator, elevator.direction);
 
-
-    }
     }
 }
