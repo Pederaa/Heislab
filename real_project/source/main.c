@@ -52,10 +52,13 @@ int main(){
                 Elevator_stop(&elevator);
                 lights_clear_orders_at_floor(&lights, &elevator);
                 Elevator_open_door(&elevator);
+                ec.target_floor = -1;
                 continue;
             }
         }
-        elevator_controller_change_target_floor(&ec, &elevator, &lights);
+        if (ec.target_floor == -1) {
+            elevator_controller_change_target_floor(&ec, &elevator, &lights);
+        }
 
         // Velger retning heisen skal gå i avhengig av heisens posisjon og beestillinger.
         elevator_controller_choose_dir(&ec, &elevator);
