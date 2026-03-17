@@ -1,0 +1,14 @@
+PROJECT_NAME           = "Heislab"
+OUTPUT_DIRECTORY       = docs
+INPUT                  = source
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.c
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
