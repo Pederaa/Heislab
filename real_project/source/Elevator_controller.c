@@ -13,9 +13,6 @@ bool elevator_controller_should_stop(int floor, bool at_floor, Elevator_controll
     return (floor == ec.target_floor);
 };
 
-void elevator_controller_new_target_floor(Elevator_controller* ec, int target){
-    ec->target_floor = target;
-};
 
 void elevator_controller_choose_dir(Elevator_controller* ec, Elevator* e){
     if (ec->target_floor > e->current_floor){
