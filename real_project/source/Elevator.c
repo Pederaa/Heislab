@@ -25,16 +25,6 @@ void Elevator_close_door(Elevator* e){
     elevio_doorOpenLamp(0);
 }
 
-bool Elevator_floor_reached(){ //brukes ikke
-    int floor = elevio_floorSensor();
-    if (floor != -1){
-        return true;
-    } else {
-        return false;
-    }
-
-}
-
 Elevator Elevator_initialize(){
     Elevator e = {0};
     int sensor_value = elevio_floorSensor();

@@ -13,12 +13,8 @@ bool elevator_controller_should_stop(int floor, bool at_floor, Elevator_controll
     return (floor == ec.target_floor);
 };
 
-void elevator_controller_new_target_floor(Elevator_controller* ec, int target){
-    ec->target_floor = target;
-};
 
 void elevator_controller_choose_dir(Elevator_controller* ec, Elevator* e){
-   
     if (ec->target_floor > e->current_floor){
         e->direction = DIRN_UP;
     } 
@@ -27,11 +23,13 @@ void elevator_controller_choose_dir(Elevator_controller* ec, Elevator* e){
     } 
     else if(ec->target_floor == e->current_floor) {
         e->direction = DIRN_STOP;
+    } else{
+        e->direction = DIRN_STOP;
     }
 }
 Elevator_controller Elevator_controller_initialize(){
     Elevator_controller ec = {0};
-    ec.target_floor = 0;
+    ec.target_floor = -1;
     return ec;
 }
 
@@ -90,5 +88,5 @@ void elevator_controller_change_target_floor(Elevator_controller* ec, Elevator* 
                 return;
             }
         }
-    ec->target_floor = e->current_floor;
+    ec->target_floor = -1;
 }
