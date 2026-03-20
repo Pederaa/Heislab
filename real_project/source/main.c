@@ -14,7 +14,6 @@ int main(){
     Elevator_controller ec = Elevator_controller_initialize();
     Elevator_initialize_pos(&elevator);
     Lights lights = {0};
-    bool just_arrived = false;
 
 
     while(true){
@@ -56,7 +55,7 @@ int main(){
                 continue;
             }
         }
-        }
+        
         if (ec.target_floor == -1) {
             elevator_controller_change_target_floor(&ec, &elevator, &lights);
         }
@@ -66,3 +65,4 @@ int main(){
         elevator_controller_choose_dir(&ec, &elevator);
         Elevator_move(&elevator, elevator.direction);
     }
+}
